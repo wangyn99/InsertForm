@@ -1,0 +1,39 @@
+<head>
+  <title>insertform</title>
+</head>
+
+<body>
+  {{> insertContactBook}}
+  {{> peoplelist}}
+</body>
+
+<template name='insertContactBook'>
+	{{>quickForm collection='Contacts' id='insertContactBook' type='insert'}}
+</template>
+
+<template name = 'peoplelist'>
+  <ol>
+	{{#each people}}
+    {{> person}}
+	{{/each}}
+  </ol>
+</template>
+<template name="person">
+   <li>
+      <div class="person">
+      {{name}},{{region}},{{branch}}
+        {{> deleteContactBook}}
+      {{#if updating}}
+		    {{> updateContactBook}}	
+      {{/if}}
+        </div>
+    </li>
+</template>
+
+<template name="updateContactBook">
+  {{> quickForm collection="Contacts" doc= editingDoc id="updateContactBook" type="update"}}
+</template>
+<template name="deleteContactBook">
+  {{> afDeleteButton collection="Contacts" doc=editingDoc}}
+</template>
+
