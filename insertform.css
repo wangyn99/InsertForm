@@ -1,1 +1,44 @@
 /* CSS declarations go here */
+* {
+    padding: 0;
+    margin: 0;
+}
+html, body {
+    height: 100%;
+}
+
+body {
+    font-size: 16px;
+    line-height: 1.5;
+    background: #eeeeee;
+    color: #333333;
+}
+body, input {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+#main-pane, #side-pane{
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    overflow: hidden;
+}
+#main-pane {
+    top: 0;
+    right:20px;
+    bottom: 0;
+    left: 450px;
+    overflow: auto;
+}
+#side-pane {
+    width: 400px;
+    left: 10px;
+    right: auto;
+    overflow: auto;
+    background: #eee;
+    border-right: 1px solid #999;
+    background: #ddd;
+}/* CSS declarations go here */
+/* CSS declarations go here */

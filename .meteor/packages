@@ -4,8 +4,10 @@
 # but you can also edit it by hand.
 
 standard-app-packages
-autopublish
 insecure
 autoform
 collection2
 bootstrap
+accounts-base
+accounts-ui
+accounts-password

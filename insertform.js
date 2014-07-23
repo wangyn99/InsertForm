@@ -63,35 +63,60 @@ Contacts = new Meteor.Collection("contacts",{
 
 
 if (Meteor.isClient) {
+  
+  Meteor.subscribe("contacts");
+  
   Template.peoplelist.people = function(){
     return Contacts.find();
   };
   Template.person.updating = function(){
-   // return Session.get("updating");
-    return Session.get("update-"+this._id);
+    return Session.get("updateform") === this._id;
   };
   Template.person.events({
     'dblclick .person':function(e,t){
-      Session.set("update-"+t.data._id,true);
-     // Session.set("updating",true);
-      Session.set("selectedDocId",this._id);
+      Session.set("updateform",t.data._id);
+      //console.log(Session.get("updateform"));
     },
-    	'focusout .person': function(e,t){
-        Session.set("selectedDocId",null);
-       Session.set("update-"+t.data._id,false);
-  }
+    'click button': function(e,t){
+      Meteor.call('delContact',t.data._id);
+    }
   });
-  Template.updateContactBook.editingDoc = function () {
-  return Contacts.findOne({_id: Session.get("selectedDocId")});
-};
-    Template.deleteContactBook.editingDoc = function (e,t) {
-  return Contacts.findOne({_id: t.data._id });
-};
-
+  AutoForm.hooks({
+    updateContactBook: {
+      endSubmit:function(formId,template){
+      //console.log("hook");
+      Session.set("updateform",null);
+      // console.log(Session.get("updateform"));
+      }
+    }
+  });
+  Accounts.ui.config({
+  passwordSignupFields:'USERNAME_ONLY'
+});
 }
 
 if (Meteor.isServer) {
   Meteor.startup(function () {
+    Meteor.publish("contacts", function(){
+      return Contacts.find();
+    });
+    
+    Meteor.methods({
+      delContact: function(docId){
+	if(adminUser(this.userId)){
+	 // console.log("this test check");
+	  Contacts.remove({_id:docId});
+	}
+      }
+    });
     // code to run on server at startup
   });
 }
+
+function adminUser(userId){
+	//console.log("the userId  "+userId);
+	var adminUser = Meteor.users.findOne({username:"admin"});
+	return (userId&&adminUser&&userId===adminUser._id);
+};
+
+

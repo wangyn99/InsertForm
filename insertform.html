@@ -3,8 +3,17 @@
 </head>
 
 <body>
-  {{> insertContactBook}}
-  {{> peoplelist}}
+ <div id="main-pane">
+    <h3>ContactBook</h3>
+    <div style="float:right; margin-right: 15px;">
+      {{> loginButtons align="right"}}
+    </div>
+	{{> peoplelist}}
+  </div>
+  <div id="side-pane">
+		<h3>Please input new information.</h3>
+		{{> insertContactBook}}
+</div>
 </body>
 
 <template name='insertContactBook'>
@@ -22,18 +31,13 @@
    <li>
       <div class="person">
       {{name}},{{region}},{{branch}}
-        {{> deleteContactBook}}
+      <button type="button">X</button>
       {{#if updating}}
-		    {{> updateContactBook}}	
+	{{> quickForm collection="Contacts" doc=this id="updateContactBook" type="update"}}
       {{/if}}
         </div>
     </li>
 </template>
 
-<template name="updateContactBook">
-  {{> quickForm collection="Contacts" doc= editingDoc id="updateContactBook" type="update"}}
-</template>
-<template name="deleteContactBook">
-  {{> afDeleteButton collection="Contacts" doc=editingDoc}}
-</template>
+
 
