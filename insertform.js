@@ -77,7 +77,7 @@ if (Meteor.isClient) {
       Session.set("updateform",t.data._id);
       //console.log(Session.get("updateform"));
     },
-    'click button': function(e,t){
+    'click #deleteperson': function(e,t){
       Meteor.call('delContact',t.data._id);
     }
   });

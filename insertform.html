@@ -31,7 +31,7 @@
    <li>
       <div class="person">
       {{name}},{{region}},{{branch}}
-      <button type="button">X</button>
+      <button type="button" id="deleteperson">X</button>
       {{#if updating}}
 	{{> quickForm collection="Contacts" doc=this id="updateContactBook" type="update"}}
       {{/if}}
