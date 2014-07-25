@@ -18,7 +18,8 @@
       //console.log(Session.get("updateform"));
     },
     'click #deleteperson': function(e,t){
-      Meteor.call('delContact',t.data._id);
+      Contacts.remove({_id:t.data._id});
+    //  Meteor.call('delContact',t.data._id);
     }
   });
   AutoForm.hooks({

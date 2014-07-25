@@ -97,3 +97,14 @@ function adminUser(userId){
   var admUser =admUser1 ||admUser2 ||admUser3;
   return (userId&&admUser&&userId===admUser._id);
 };
+Contacts.allow({
+	insert: function(userId,doc){
+		return adminUser(userId);
+	},
+	update: function(userId,docs,fields,modifer){
+		return adminUser(userId);
+	},
+	remove: function(userId,docs){
+		return adminUser(userId);
+	}
+});
