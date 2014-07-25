@@ -58,34 +58,23 @@ Contacts = new Meteor.Collection("contacts",{
       max: 1000,
        optional: true
     },
-   /*  owner:{
-      type:String,
-      autoVaule:function(){
-        if(this.isInsert){
-          return Meteor.userId;
-        }
-        else if(this.isUpsert){
-          return {$setOnInsert:Meteor.userId};
-        }
-        else {
+     owner: {
+    type: String,
+    label: "Owner(Not neccessary to write)",
+      autoValue: function() {
+        if (this.isInsert) {
+          return this.userId;
+        } else if (this.isUpsert) {
+          return {$setOnInsert: this.userId};
+        } else {
           this.unset();
         }
       }
-    },
-    createAt:{
-      type:Date,
-      autoVaule:function(){
-        if(this.isInsert){
-          return new Date;
-        }
-        else if(this.isUpsert){
-          return {$setOnInsert:new Date};
-        }
-        else {
-          this.unset();
-        }
-      }
-    }*/
+  },
+    createdAt: {
+    type: Date,
+      defaultValue: new Date 
+  }
   }
 });
 

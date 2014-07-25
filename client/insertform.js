@@ -1,5 +1,9 @@
 
   Meteor.subscribe("contacts");
+ /*Template.workspace.alerting = function(){
+   Session.get("redu_alerting");
+};*/
+  
   Template.workspace.events({
 	  'click #logout': function(){
       Meteor.logout();
@@ -8,6 +12,8 @@
   
   Template.peoplelist.people = function(){
     return Contacts.find();
+    //return Contacts.find().sort({createdAt:-1});
+    //不能显示结果
   };
   Template.person.updating = function(){
     return Session.get("updateform") === this._id;
@@ -31,6 +37,18 @@
       }
     }
   });
+ /*  AutoForm.hooks({
+    insertContactBook: {
+     endSubmit:function(formId,template){
+       console.log("hook doc.name"+AutoForm.getFieldVaule(formId,"name"));
+       var currentname = AutoForm.getFieldVaule(formId,"name");
+       console.log("hook doc.name"+currentname);
+	if(Contacts.findOne({name: currentname}))
+	  Session.set("redu_alertng",true);
+      }
+    }
+  });*/
+  
   Accounts.ui.config({
   passwordSignupFields:'USERNAME_ONLY'
 });
