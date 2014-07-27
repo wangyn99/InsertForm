@@ -4,9 +4,9 @@ Contacts = new Meteor.Collection("contacts",{
       type: String,
       label: "Name"
     },
-    sex:{
+    gender:{
       type: String,
-      label:"sex",
+      label:"gender",
       optional:true
     },
     region:{
@@ -83,8 +83,11 @@ function adminUser(userId){
   var admUser1 = Meteor.users.findOne({username:"admin"});
   var admUser2 = Meteor.users.findOne({username:"alice"});
   var admUser3 = Meteor.users.findOne({username:"bob"});
-  var admUser =admUser1 ||admUser2 ||admUser3;
-  return (userId&&admUser&&userId===admUser._id);
+ if(userId){
+   return (admUser1&&userId===admUser1._id)||
+   (admUser2&&userId===admUser2._id)||
+   (admUser3&&userId===admUser3._id);
+}
 };
 Contacts.allow({
 	insert: function(userId,doc){

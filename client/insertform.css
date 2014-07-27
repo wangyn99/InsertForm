@@ -33,7 +33,7 @@ body, input {
     overflow: auto;
 }
 #side-pane {
-    width: 400px;
+    width: 380px;
     left: 10px;
     right: auto;
     overflow: auto;
