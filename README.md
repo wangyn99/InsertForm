@@ -1,1 +1,1 @@
-Use autoform paackage.
+Use autoform package.
